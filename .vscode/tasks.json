@@ -1,0 +1,35 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "✅ Install templates",
+      "options": {
+        "statusbar": {
+          "color": "#00ffaa"
+        }
+      },
+      "type": "shell",
+      "command": "./scripts/install.ps1",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "❌ Uninstall templates",
+      "options": {
+        "statusbar": {
+          "color": "#00ffaa"
+        }
+      },
+      "type": "shell",
+      "command": "./scripts/uninstall.ps1",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": []
+    }
+  ]
+}

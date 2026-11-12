@@ -1,0 +1,24 @@
+{
+  "profiles": {
+    "-h": {
+      "commandName": "Project",
+      "commandLineArgs": "-h"
+    },
+    "--help": {
+      "commandName": "Project",
+      "commandLineArgs": "--help"
+    },
+    "-v": {
+      "commandName": "Project",
+      "commandLineArgs": "-v"
+    },
+    "--version": {
+      "commandName": "Project",
+      "commandLineArgs": "--version"
+    },
+    "default": {
+      "commandName": "Project",
+      "commandLineArgs": "default"
+    }
+  }
+}

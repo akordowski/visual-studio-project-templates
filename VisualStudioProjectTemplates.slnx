@@ -1,0 +1,6 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/ConsoleApplicationCSharp/ConsoleApplicationCSharp.csproj" />
+    <Project Path="src/XUnitCSharp/XUnitCSharp.csproj" />
+  </Folder>
+</Solution>
