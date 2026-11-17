@@ -1,11 +1,21 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net10.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-    <IsPackable>false</IsPackable>
+    <TargetFramework Condition="'$(TargetFrameworkOverride)' == ''">net11.0</TargetFramework>
+    <TargetFramework Condition="'$(TargetFrameworkOverride)' != ''">TargetFrameworkOverride</TargetFramework>
+    <RootNamespace Condition="'$(name)' != '$(name{-VALUE-FORMS-}safe_namespace)'">Company.TestProject1</RootNamespace>
+    <LangVersion Condition="'$(langVersion)' != ''">$(ProjectLanguageVersion)</LangVersion>
+    <ImplicitUsings Condition="'$(csharpFeature_ImplicitUsings)' == 'true'">enable</ImplicitUsings>
+    <Nullable Condition="'$(csharpFeature_Nullable)' == 'true'">enable</Nullable>
+    <IsPackable Condition="'$(EnablePack)' == 'true'">true</IsPackable>
+    <IsPackable Condition="'$(EnablePack)' != 'true'">false</IsPackable>
     <NoWarn>$(NoWarn);NU1507</NoWarn>
+<!--#if (XUnitVersion == "v3")-->
+    <OutputType>Exe</OutputType>
+<!--#endif-->
+<!--#if (XUnitVersion == "v3" && TestRunner == "Microsoft.Testing.Platform")-->
+    <UseMicrosoftTestingPlatformRunner>true</UseMicrosoftTestingPlatformRunner>
+<!--#endif-->
   </PropertyGroup>
 
   <!-- See: https://github.com/VerifyTests/Verify/blob/main/docs/maintenance-fee.md#exempt -->
@@ -14,26 +24,44 @@
     <Verify_SponsorshipExemptionUntil>2027-11</Verify_SponsorshipExemptionUntil>
   </PropertyGroup>
 
+<!--#if (XUnitVersion == "v3")-->
   <ItemGroup>
-    <PackageReference Include="coverlet.collector" Version="10.1.0">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="FluentAssertions" Version="8.11.0" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="11.0.0" />
+    <Content Include="xunit.runner.json" CopyToOutputDirectory="IfDifferent" />
+  </ItemGroup>
+
+<!--#if (TestRunner == "Microsoft.Testing.Platform")-->
+  <ItemGroup>
+    <PackageReference Include="xunit.v3.mtp-v2" Version="4.0.3" />
+  </ItemGroup>
+<!--#else-->
+  <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.12.0" />
+    <PackageReference Include="xunit.v3.mtp-off" Version="4.0.3" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="4.0.1" />
+  </ItemGroup>
+<!--#endif-->
+<!--#else-->
+  <ItemGroup>
+    <PackageReference Include="coverlet.collector" Version="10.1.1" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.12.0" />
+    <PackageReference Include="xunit" Version="2.9.3" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="4.0.1" />
+  </ItemGroup>
+<!--#endif-->
+
+  <ItemGroup>
+    <PackageReference Include="FluentAssertions" Version="8.11.0" />
+    <PackageReference Include="FluentResults" Version="4.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="11.0.0" />
     <PackageReference Include="Moq" Version="4.21.0" />
-    <PackageReference Include="Verify.XunitV3" Version="33.3.4" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="4.0.1">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="xunit.v3" Version="4.0.3" />
+    <PackageReference Include="Verify.XunitV3" Version="33.5.0" />
     <PackageReference Include="XunitXml.TestLogger" Version="8.1.0" />
   </ItemGroup>
 
+<!--#if (csharpFeature_ImplicitUsings)-->
   <ItemGroup>
     <Using Include="Xunit" />
   </ItemGroup>
+<!--#endif-->
 
 </Project>

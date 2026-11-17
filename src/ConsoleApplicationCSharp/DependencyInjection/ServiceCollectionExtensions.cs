@@ -2,6 +2,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Serilog;
 using Serilog.Core;
 using System.Diagnostics.CodeAnalysis;
+using Test1.Service;
 
 namespace ConsoleApplicationCSharp.DependencyInjection;
 
@@ -43,7 +44,7 @@ internal static class ServiceCollectionExtensions
 
         public IServiceCollection AddServices()
         {
-            return services;
+            return services.AddSingleton<IBranchSubService, BranchSubService>();
         }
     }
 }
