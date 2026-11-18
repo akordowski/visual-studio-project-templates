@@ -1,8 +1,9 @@
+using ConsoleApplicationCSharp.Service;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
 using Serilog.Core;
 using System.Diagnostics.CodeAnalysis;
-using Test1.Service;
+using System.Linq;
 
 namespace ConsoleApplicationCSharp.DependencyInjection;
 
@@ -11,7 +12,7 @@ internal static class ServiceCollectionExtensions
 {
     extension(IServiceCollection services)
     {
-        public IServiceCollection AddLogging(string[] args)
+        public IServiceCollection AddLogging(string logFilename, string[] args)
         {
             const string outputTemplate = "[{Timestamp:yyyy-MM-dd HH:mm:ss}] [{LogEventLevel}] {Message}{NewLine}{Exception}";
 
@@ -30,7 +31,7 @@ internal static class ServiceCollectionExtensions
             if (!excludeFileLogger)
             {
                 loggerConfig.WriteTo.File(
-                    path: "project.log",
+                    path: logFilename,
                     outputTemplate: outputTemplate,
                     formatProvider: Global.Culture);
             }

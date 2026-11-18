@@ -1,6 +1,5 @@
 using Spectre.Console;
 using Spectre.Console.Cli;
-using Test1.Service;
 
 namespace ConsoleApplicationCSharp.Commands.Branch;
 
@@ -31,14 +30,14 @@ public sealed class BranchSubCommand : AsyncCommand<BranchSubSettings>
         ArgumentNullException.ThrowIfNull(context);
         ArgumentNullException.ThrowIfNull(settings);
 
-        if (string.IsNullOrWhiteSpace(settings.Option1))
+        if (string.IsNullOrWhiteSpace(settings.StrOption))
         {
-            return ValidationResult.Error("Option1 must not be empty or whitespace");
+            return ValidationResult.Error("StrOption must not be empty or whitespace");
         }
 
-        if (settings.Option2 <= 0)
+        if (settings.NumericOption <= 0)
         {
-            return ValidationResult.Error("Option2 must not be lower or equal 0");
+            return ValidationResult.Error("NumericOption must not be less or equal 0");
         }
 
         return base.Validate(context, settings);

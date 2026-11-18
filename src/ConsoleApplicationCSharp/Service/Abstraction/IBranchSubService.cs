@@ -1,6 +1,6 @@
-﻿using FluentResults;
+using FluentResults;
 
-namespace Test1.Service;
+namespace ConsoleApplicationCSharp.Service;
 
 public interface IBranchSubService
 {

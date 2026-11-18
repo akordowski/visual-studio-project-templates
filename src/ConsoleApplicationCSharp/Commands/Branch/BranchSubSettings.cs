@@ -5,11 +5,11 @@ namespace ConsoleApplicationCSharp.Commands.Branch;
 
 public sealed class BranchSubSettings : BranchSettings
 {
-    [CommandOption("--option1", isRequired: true)]
-    [Description("Option1")]
-    public string Option1 { get; set; } = null!;
+    [CommandOption("--str-option", isRequired: true)]
+    [Description("StrOption")]
+    public string StrOption { get; init; } = null!;
 
-    [CommandOption("--option2")]
-    [Description("Option2")]
-    public int Option2 { get; set; }
+    [CommandOption("--numeric-option")]
+    [Description("NumericOption")]
+    public int NumericOption { get; init; }
 }
